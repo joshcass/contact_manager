@@ -5,11 +5,11 @@ RSpec.describe "phone_numbers/index", type: :view do
     assign(:phone_numbers, [
       PhoneNumber.create!(
         :number => "MyText",
-        :person => nil
+        :person => Person.create(first_name: "Han", last_name: "Solo")
       ),
       PhoneNumber.create!(
         :number => "MyText",
-        :person => nil
+        :person => Person.create(first_name: "Han", last_name: "Solo")
       )
     ])
   end
@@ -17,6 +17,5 @@ RSpec.describe "phone_numbers/index", type: :view do
   it "renders a list of phone_numbers" do
     render
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
   end
 end
