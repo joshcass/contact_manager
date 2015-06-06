@@ -114,7 +114,7 @@ RSpec.describe PhoneNumbersController, type: :controller do
         put :update, {:id => phone_number.to_param, :phone_number => new_attributes}, valid_session
         phone_number.reload
         expect(phone_number.number).to eq '2223334444'
-        expect(phone_number.person_id).to eq 20
+        expect(phone_number.person_id).to eq person.id
       end
 
       it "assigns the requested phone_number as @phone_number" do
