@@ -4,7 +4,7 @@ RSpec.describe "email_addresses/show", type: :view do
   before(:each) do
     @email_address = assign(:email_address, EmailAddress.create!(
       :address => "MyText",
-      :person => Person.create(first_name: "Han", last_name: "Solo")
+      :contact => Person.create(first_name: "Han", last_name: "Solo")
     ))
   end
 
