@@ -13,12 +13,12 @@ RSpec.describe PhoneNumber, type: :model do
     expect(phone_number).to_not be_valid
   end
 
-  it 'has to have a person_id' do
+  it 'has to have a contact_id' do
     phone_number.contact_id = nil
     expect(phone_number).to_not be_valid
   end
 
-  it 'is associated with a person' do
+  it 'is associated with a contact' do
     expect(phone_number).to respond_to(:contact)
   end
 end

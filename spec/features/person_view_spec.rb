@@ -78,7 +78,7 @@ describe 'the person view', type: :feature do
     end
 
     it 'has a link to add a new email address' do
-      expect(page).to have_link('Add email address', href: new_email_address_path(person_id: person.id))
+      expect(page).to have_link('Add email address', href: new_email_address_path(contact_id: person.id, contact_type: "Person"))
     end
 
     it 'adds a new email address' do
@@ -96,7 +96,7 @@ describe 'the person view', type: :feature do
     end
 
     it 'edits an email address' do
-      email = person.email_addresses.first
+      email = person.email_addresses.last
       old_email = email.address
 
       first(:link, 'edit').click
@@ -114,7 +114,7 @@ describe 'the person view', type: :feature do
     end
 
     it 'deletes an email address' do
-      email = person.email_addresses.first
+      email = person.email_addresses.last
       address = email.address
 
       expect(page).to have_content(address)
