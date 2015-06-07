@@ -27,11 +27,11 @@ RSpec.describe PhoneNumbersController, type: :controller do
     Person.create!(first_name: "Han", last_name: "Solo")
   }
   let(:valid_attributes) {
-    {number: "1112223333", person_id: person.id}
+    {number: "1112223333", contact_id: person.id, contact_type: "Person"}
   }
 
   let(:invalid_attributes) {
-    {number: nil, person_id: nil}
+    {number: nil, contact_id: nil, contact_type: "Person"}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -84,9 +84,10 @@ RSpec.describe PhoneNumbersController, type: :controller do
         expect(assigns(:phone_number)).to be_persisted
       end
 
-      it "redirects to the phone numbers person" do
+      it "redirects to the phone numbers contact" do
         post :create, {:phone_number => valid_attributes}, valid_session
-        expect(response).to redirect_to(person)
+        phone_number = PhoneNumber.all.first
+        expect(response).to redirect_to(phone_number.contact)
       end
     end
 
@@ -106,7 +107,7 @@ RSpec.describe PhoneNumbersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        {number: '2223334444', person_id: person.id}
+        {number: '2223334444', contact_id: person.id, contact_type: "Person"}
       }
 
       it "updates the requested phone_number" do
@@ -114,7 +115,7 @@ RSpec.describe PhoneNumbersController, type: :controller do
         put :update, {:id => phone_number.to_param, :phone_number => new_attributes}, valid_session
         phone_number.reload
         expect(phone_number.number).to eq '2223334444'
-        expect(phone_number.person_id).to eq person.id
+        expect(phone_number.contact_id).to eq person.id
       end
 
       it "assigns the requested phone_number as @phone_number" do
@@ -123,10 +124,10 @@ RSpec.describe PhoneNumbersController, type: :controller do
         expect(assigns(:phone_number)).to eq(phone_number)
       end
 
-      it "redirects to the phone numbers person" do
+      it "redirects to the phone numbers contact" do
         phone_number = PhoneNumber.create! valid_attributes
         put :update, {:id => phone_number.to_param, :phone_number => valid_attributes}, valid_session
-        expect(response).to redirect_to(person)
+        expect(response).to redirect_to(phone_number.contact)
       end
     end
 
@@ -153,10 +154,10 @@ RSpec.describe PhoneNumbersController, type: :controller do
       }.to change(PhoneNumber, :count).by(-1)
     end
 
-    it "redirects back to the person" do
+    it "redirects back to the contact" do
       phone_number = PhoneNumber.create! valid_attributes
       delete :destroy, {:id => phone_number.to_param}, valid_session
-      expect(response).to redirect_to(person)
+      expect(response).to redirect_to(phone_number.contact)
     end
   end
 
