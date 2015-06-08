@@ -18,4 +18,9 @@ RSpec.describe "email_addresses/edit", type: :view do
       assert_select "input#email_address_contact_id[name=?]", "email_address[contact_id]"
     end
   end
+
+  it 'shows the contact name in the title' do
+    render
+    assert_select("h1", text: "Editing Email Address for #{@email_address.contact.first_name} #{@email_address.contact.last_name}")
+  end
 end
