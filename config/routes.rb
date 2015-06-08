@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  root to: 'companies#index'
   resources :companies
   resources :email_addresses, except: [:index, :show]
   resources :phone_numbers, except: [:index, :show]
   resources :people
+  get 'auth/:provider/callback' => 'sessions#create'
+  resource :sessions, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
