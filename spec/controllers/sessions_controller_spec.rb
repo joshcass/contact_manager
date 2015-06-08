@@ -29,7 +29,7 @@ RSpec.describe SessionsController, type: :controller do
       expect(controller.current_user.id).to eq user.id
     end
 
-    it 'redirects to the companies page' do
+    it 'redirects to the index page' do
         @request.env["omniauth.auth"] = {
         'provider' => 'twitter',
         'info' => {'name' => 'Han Solo', 'image' => 'http://www.twitter.com/image2'},
