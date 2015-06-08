@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "phone_numbers/edit", type: :view do
   before(:each) do
     @phone_number = assign(:phone_number, PhoneNumber.create!(
-      :number => "MyText",
-      :contact => Person.create(first_name: "Han", last_name: "Solo")
-    ))
+        :number => "MyText",
+        :contact => Person.create(first_name: "Han", last_name: "Solo")
+      ))
   end
 
   it "renders the edit phone_number form" do
@@ -17,5 +17,10 @@ RSpec.describe "phone_numbers/edit", type: :view do
 
       assert_select "input#phone_number_contact_id[name=?]", "phone_number[contact_id]"
     end
+  end
+
+  it 'shows the contact name in the title' do
+    render
+    assert_select("h1", text: "Editing Phone Number for #{@phone_number.contact.first_name} #{@phone_number.contact.last_name}")
   end
 end
