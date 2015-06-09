@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe 'the person view', type: :feature do
-  let(:person) {Person.create(first_name: "Han", last_name: "Solo")}
-
+  let(:person) { Fabricate(:person)}
+  let(:user) { person.user }
   describe 'phone numbers' do
 
     before(:each) do
       person.phone_numbers.create(number: "555-1234")
       person.phone_numbers.create(number: "555-5678")
+      login_as(user)
       visit person_path(person)
     end
 
@@ -68,6 +69,7 @@ describe 'the person view', type: :feature do
     before(:each) do
       person.email_addresses.create(address: "han@solo.com")
       person.email_addresses.create(address: "han@fett.com")
+      login_as(user)
       visit person_path(person)
     end
 

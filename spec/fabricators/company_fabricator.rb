@@ -1,4 +1,4 @@
 Fabricator(:company) do
-  name "The Empire"
+  name Faker::Company.name
   user
 end

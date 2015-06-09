@@ -1,6 +1,6 @@
 Fabricator(:user) do
-  name "Han Solo"
-  image "www.picture.com"
+  name Faker::Name.name
+  image Faker::Avatar.image
   provider "twitter"
   uid {Fabricate.sequence(:uid)}
 end
