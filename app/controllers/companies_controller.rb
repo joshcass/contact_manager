@@ -1,10 +1,10 @@
 class CompaniesController < ApplicationController
-  before_action :find_resource, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @companies = current_user.companies
   end
 
   # GET /companies/1
@@ -65,5 +65,9 @@ class CompaniesController < ApplicationController
    # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name)
+    end
+
+    def set_company
+      @company = current_user.companies.find(params[:id])
     end
 end

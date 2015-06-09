@@ -23,8 +23,10 @@ RSpec.describe CompaniesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Company. As you add validations to Company, be sure to
   # adjust the attributes here as well.
+  let(:user) { Fabricate(:user) }
+
   let(:valid_attributes) {
-    {name: "The Empire" }
+    {name: "The Empire", user_id: user.id }
   }
 
   let(:invalid_attributes) {
@@ -34,7 +36,7 @@ RSpec.describe CompaniesController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CompaniesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { {user_id: user.id} }
 
   describe "GET #index" do
     it "assigns all companies as @companies" do

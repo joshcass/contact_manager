@@ -1,0 +1,9 @@
+<% if current_user %>
+  <%= image_tag current_user.image, height: '50', alt: 'User Image' %><h1>Welcome to your contact manager <%= current_user.name %></h1>
+  <ul>
+    <li><%= link_to "Your People", people_path %></li>
+    <li><%= link_to "Your Companies", companies_path %></li>
+  </ul>
+<% else %>
+  <h1>Welcom to contact manager, please log in</h1>
+<% end %>
