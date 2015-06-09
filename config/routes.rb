@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   root to: 'site#index'
-  get '/login' => redirect('/auth/twitter'), as: :login
   resources :companies
   resources :email_addresses, except: [:index, :show]
   resources :phone_numbers, except: [:index, :show]
   resources :people
+  get '/login' => redirect('/auth/twitter'), as: :login
   get 'auth/:provider/callback' => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: :logout
-  resource :sessions, only: [:create]
+  resource :sessions, only: [:create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

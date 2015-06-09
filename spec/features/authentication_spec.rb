@@ -41,8 +41,8 @@ describe 'the application', type: :feature do
       expect(page).to have_link("Logout", href: logout_path)
     end
 
-    xit 'does not have a login link' do
-      expect(page).to_not have_link("Login", href: login_link)
+    it 'does not have a login link' do
+      expect(page).to_not have_link("Login", href: login_path)
     end
   end
 end

@@ -17,7 +17,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     it 'logs in an existing user' do
-       @request.env["omniauth.auth"] = {
+      @request.env["omniauth.auth"] = {
         'provider' => 'twitter',
         'info' => {'name' => 'Han Solo', 'image' => 'http://www.twitter.com/image2'},
         'uid' => 'xyz456'
@@ -30,15 +30,35 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     it 'redirects to the index page' do
-        @request.env["omniauth.auth"] = {
+      @request.env["omniauth.auth"] = {
         'provider' => 'twitter',
         'info' => {'name' => 'Han Solo', 'image' => 'http://www.twitter.com/image2'},
         'uid' => 'xyz456'
       }
-      user = User.create(provider: 'twitter', uid: 'xyz456', name: 'Han Solo', image: 'http://www.twitter.com/image2')
 
       post :create
       expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe '#destroy' do
+
+    it 'logs out an existing user' do
+      user = User.create(provider: 'twitter', uid: 'xyz456', name: 'Han Solo', image: 'http://www.twitter.com/image2')
+      session[:user_id] = user.id
+      expect(controller.current_user.id).to eq user.id
+
+      delete :destroy
+      expect(controller.current_user).to eq nil
+    end
+
+    it 'redirects to the index page' do
+      user = User.create(provider: 'twitter', uid: 'xyz456', name: 'Han Solo', image: 'http://www.twitter.com/image2')
+      session[:user_id] = user.id
+
+      delete :destroy
+      expect(session[:user_id]).to eq nil
+      expect(response).to redirect_to root_path
     end
   end
 end
