@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = Person.new(user_id: current_user.id)
+    @person = Person.new(user_id: session[:user_id])
   end
 
   # GET /people/1/edit

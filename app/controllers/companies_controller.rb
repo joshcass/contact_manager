@@ -14,7 +14,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new(user_id: current_user.id)
+    @company = Company.new(user_id: session[:user_id])
   end
 
   # GET /companies/1/edit
