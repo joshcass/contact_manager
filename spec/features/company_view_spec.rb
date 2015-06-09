@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 describe 'the company view', type: :feature do
-  let(:company) {Company.create(name: "The Empire")}
+  let(:company) {Fabricate(:company)}
+  let(:user) {company.user}
 
   describe 'phone numbers' do
     before(:each) do
       company.phone_numbers.create(number: "555-1212")
       company.phone_numbers.create(number: "555-3333")
+      login_as(user)
       visit company_path(company)
     end
 
@@ -67,6 +69,7 @@ describe 'the company view', type: :feature do
     before(:each) do
       company.email_addresses.create(address: "han@solo.com")
       company.email_addresses.create(address: "han@fett.com")
+      login_as(user)
       visit company_path(company)
     end
 
