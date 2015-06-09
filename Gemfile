@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
@@ -34,7 +34,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
  gem 'omniauth'
  gem 'omniauth-twitter'
- gem 'rails_12factor'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,7 +48,7 @@ group :development, :test do
  gem 'rspec-rails'
 
  gem 'database_cleaner'
- 
+
  gem 'capybara'
 end
 
