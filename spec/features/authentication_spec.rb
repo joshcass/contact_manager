@@ -28,6 +28,8 @@ describe 'the application', type: :feature do
         get '/fake_login' => 'fake_sessions#create', as: :fake_login
         get 'login' => redirect('/auth/twitter'), as: :login
         delete 'logout' => 'sessions#destroy', as: :logout
+        resources :people
+        resources :companies
       end
       user = User.create(name: "Han Solo")
       visit fake_login_path(user_id: user.id)
