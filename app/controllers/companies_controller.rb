@@ -14,7 +14,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new
+    @company = Company.new(user_id: current_user.id)
   end
 
   # GET /companies/1/edit
@@ -64,7 +64,7 @@ class CompaniesController < ApplicationController
   private
    # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name)
+      params.require(:company).permit(:name, :user_id)
     end
 
     def set_company
